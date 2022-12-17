@@ -1,22 +1,6 @@
 <template>
   <div class="notes">
-
-    <!-- <div class="card has-background-success-dark p-4 mb-5">
-      <div class="field">
-        <div class="control">
-          <textarea class="textarea" placeholder="Add a new note" v-model="newNoteContent" ref="newNoteRef" />
-        </div>
-      </div>
-
-      <div class="field is-grouped is-grouped-right">
-        <div class="control">
-          <button @click="addNote()" :disabled="!newNoteContent" class="button is-link has-background-success">
-            Add New Note
-          </button>
-        </div>
-      </div>
-    </div> -->
-    <AddEditNote v-model="newNoteContent">
+    <AddEditNote v-model="newNoteContent" ref="newNoteRef">
       <template #buttons>
         <div class="control">
           <button @click="addNote()" :disabled="!newNoteContent" class="button is-link has-background-success">
@@ -42,6 +26,6 @@ const newNoteRef = ref(null)
 const addNote = () => {
   notesStore.addNote(newNoteContent.value)
   newNoteContent.value = ''
-  newNoteRef.value.focus()
+  newNoteRef.value.focusTextArea()
 }
 </script>
