@@ -1,7 +1,8 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useNotesStore = defineStore('notes-store', () => {
+export const useNotesStore = defineStore('notes', () => {
+  //state
   const notes = ref([
     {
       id: '1',
@@ -12,7 +13,7 @@ export const useNotesStore = defineStore('notes-store', () => {
       content: 'this is just a second test'
     }
   ])
-  // const doubleCount = computed(() => count.value * 2)
+//actions to change state
   function addNote(newNoteContent) {
     //creating random id based on time
     let currentDate = new Date().getTime(),
@@ -35,15 +36,17 @@ export const useNotesStore = defineStore('notes-store', () => {
   }
   function updateNote(id,editedContent)
   {
-    //way one
-    // this.notes.filter(note => {
-    //  return note.id == id
-    // })[0].content = editedContent
-    // console.log('updated');
-    //way 2
     let index = this.notes.findIndex(note => {return note.id === id})
-    // console.log(index);
     this.notes[index].content = editedContent
   }
-  return { notes, addNote, deleteNote, editNote, updateNote }
+  //getters to manupulate data in somehow and return
+const totalNotesCount = computed(() => notes.value.length)
+const totalCharactersCount = computed(() => {
+  let count = 0
+    notes.value.forEach(note => {
+    count += note.content.length
+  })
+  return count
+})
+  return { notes, addNote, deleteNote, editNote, updateNote, totalNotesCount,totalCharactersCount }
 })
