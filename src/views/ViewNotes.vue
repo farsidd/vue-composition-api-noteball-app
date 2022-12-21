@@ -16,6 +16,7 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useWatchForCharactersCount } from '../use/useWatchForCharactersCount';
 import Note from "@/components/Notes/Note.vue";
 import AddEditNote from "@/components/Notes/AddEditNote.vue";
 import { useNotesStore } from '@/stores/storeNotes';
@@ -23,9 +24,11 @@ const notesStore = useNotesStore()
 
 const newNoteContent = ref('')
 const newNoteRef = ref(null)
+
 const addNote = () => {
   notesStore.addNote(newNoteContent.value)
   newNoteContent.value = ''
   newNoteRef.value.focusTextArea()
 }
+useWatchForCharactersCount(newNoteContent, 10)
 </script>

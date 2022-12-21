@@ -3,7 +3,7 @@
     <label class="label has-text-white">{{props.label}}</label>
     <div class="field">
       <div class="control">
-        <textarea :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="textAreaRef" class="textarea" :placeholder="props.placeholder"></textarea>
+        <textarea v-autofocus :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" ref="textAreaRef" class="textarea" :placeholder="props.placeholder"></textarea>
       </div>
     </div>
 
@@ -17,6 +17,7 @@
 
 <script setup>
 import {ref} from 'vue';
+import { vAutofocus } from '@/directives/vAutofocus';
 const props = defineProps({
   modelValue: {
     type: String,

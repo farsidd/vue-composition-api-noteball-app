@@ -2,7 +2,9 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useNotesStore = defineStore('notes', () => {
+
   //state
+
   const notes = ref([
     {
       id: '1',
@@ -13,7 +15,9 @@ export const useNotesStore = defineStore('notes', () => {
       content: 'this is just a second test'
     }
   ])
+
 //actions to change state
+
   function addNote(newNoteContent) {
     //creating random id based on time
     let currentDate = new Date().getTime(),
@@ -39,7 +43,9 @@ export const useNotesStore = defineStore('notes', () => {
     let index = this.notes.findIndex(note => {return note.id === id})
     this.notes[index].content = editedContent
   }
+
   //getters to manupulate data in somehow and return
+  
 const totalNotesCount = computed(() => notes.value.length)
 const totalCharactersCount = computed(() => {
   let count = 0
